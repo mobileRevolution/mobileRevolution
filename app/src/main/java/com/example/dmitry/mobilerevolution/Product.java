@@ -1,6 +1,8 @@
 package com.example.dmitry.mobilerevolution;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.media.Image;
 
 /**
  * Created by dmitry on 30.09.17.
@@ -9,7 +11,17 @@ import android.graphics.Bitmap;
 public class Product {
 
     private String name;
-    private Bitmap photoBitmap;
+    private Image photo;
+
+    public Product(){
+
+    }
+
+    public Product(String name, Image photo )
+    {
+        setName(name);
+        setPhoto(photo);
+    }
 
 
     public String getName() {
@@ -20,11 +32,11 @@ public class Product {
         this.name = name;
     }
 
-    public Bitmap getPhotoBitmap() {
-        return photoBitmap;
+    public Image getPhoto() {
+        return photo;
     }
 
-    public void setPhotoBitmap(Bitmap photoBitmap) {
-        this.photoBitmap = photoBitmap;
+    public void setPhoto(Image photo) {
+        this.photo = photo;
     }
 }

@@ -25,32 +25,43 @@ public class MainActivity extends AppCompatActivity {
 //        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 //        rv.setLayoutManager( linearLayoutManager);
         AdapterRecycleView adapter = new AdapterRecycleView(this, products);
+        rv.setAdapter(adapter);
 
     }
 
     private void setTestData() {
-        Product p = new Product();
+       // Product p = new Product();
 
-        p.setName("Bread");
-        products.add(p);
+        products.add(new Product("Bread", null));
+        products.add(new Product("Milk", null));
+        products.add(new Product("Sweet", null));
+        products.add(new Product("Tea", null));
+        products.add(new Product("Coffe", null));
+        products.add(new Product("Apple", null));
+        products.add(new Product("PineApple", null));
+        products.add(new Product("Lime", null));
+        products.add(new Product("Lemon", null));
 
-        p.setName("Milk");
-        products.add(p);
-
-        p.setName("Sweet");
-        products.add(p);
-
-        p.setName("Tea");
-        products.add(p);
-
-        p.setName("Coffe");
-        products.add(p);
-
-        p.setName("Apple");
-        products.add(p);
-
-        p.setName("Pineapple");
-        products.add(p);
+//        p.setName("Bread");
+//        products.add(p);
+//
+//        p.setName("Milk");
+//        products.add(p);
+//
+//        p.setName("Sweet");
+//        products.add(p);
+//
+//        p.setName("Tea");
+//        products.add(p);
+//
+//        p.setName("Coffe");
+//        products.add(p);
+//
+//        p.setName("Apple");
+//        products.add(p);
+//
+//        p.setName("Pineapple");
+//        products.add(p);
 
 
     }
