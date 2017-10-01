@@ -68,7 +68,7 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
             this.nameOfProduct = (TextView)itemView.findViewById(R.id.elementTextViewName);
             this.buttonAdd = (ImageButton)itemView.findViewById(R.id.elementImageButtonAdd);
             this.viewBackground = itemView.findViewById(R.id.elementView);
-            buttonAdd.setOnClickListener(this);
+            viewBackground.setOnClickListener(this);
         }
 
         public void setDescription(String description){
