@@ -2,6 +2,7 @@ package com.example.dmitry.mobilerevolution;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 
 /**
@@ -11,14 +12,14 @@ import android.media.Image;
 public class Product {
 
     private String name;
-    private Image photo;
+    private Drawable photo;
     private String description;
 
     public Product(){
 
     }
 
-    public Product(String name, Image photo, String description)
+    public Product(String name, Drawable photo, String description)
     {
         setName(name);
         setPhoto(photo);
@@ -34,11 +35,11 @@ public class Product {
         this.name = name;
     }
 
-    public Image getPhoto() {
+    public Drawable getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Image photo) {
+    public void setPhoto(Drawable photo) {
         this.photo = photo;
     }
 
