@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="size_item_of_recycle_view">130dp</dimen>
+    <dimen name="size_item_of_background_in_item_of_rv">100dp</dimen>
+    <dimen name="picture_size_in_fragment">50dp</dimen>
+    <dimen name="marginTop_of_name_of_product">40dp</dimen>
+    <dimen name="marginLeft_of_name_of_product">160dp</dimen>
+    <dimen name="marginTop_of_image_of_product">22dp</dimen>
+    <dimen name="marginLeft_of_image_of_product">30dp</dimen>
+    <dimen name="marginTop_of_add_button_of_product">22dp</dimen>
+    <dimen name="marginRight_of_add_button_of_product">10dp</dimen>
+    <dimen name="height_of_TabLayout">35dp</dimen>
+</resources>

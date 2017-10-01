@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MobileRevolution</string>
+    <string name="first_list">LIST-1</string>
+    <string name="second_list">LIST-2</string>
 </resources>

@@ -3,30 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="130dp"
+    android:layout_height="@dimen/size_item_of_recycle_view"
     style="@style/Theme.AppCompat.Light.NoActionBar">
 
     <View
         android:id="@+id/elementView"
-        android:background="#999999"
+        android:background="@color/gray"
         android:layout_width="match_parent"
-        android:layout_height="100dp"/>
+        android:layout_height="@dimen/size_item_of_background_in_item_of_rv"/>
 
 
     <TextView
         android:id="@+id/elementTextViewName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginLeft="160dp"
+        android:layout_marginTop="@dimen/marginTop_of_name_of_product"
+        android:layout_marginLeft="@dimen/marginLeft_of_name_of_product"
         android:text="TextView" />
 
     <ImageView
         android:id="@+id/elementImageViewPhoto"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="22dp"
+        android:layout_width="@dimen/picture_size_in_fragment"
+        android:layout_height="@dimen/picture_size_in_fragment"
+        android:layout_marginLeft="@dimen/marginLeft_of_image_of_product"
+        android:layout_marginTop="@dimen/marginTop_of_image_of_product"
         app:srcCompat="@mipmap/ic_launcher" />
 
     <ImageButton
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="22dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginTop="@dimen/marginTop_of_add_button_of_product"
+        android:layout_marginRight="@dimen/marginRight_of_add_button_of_product"
         app:srcCompat="@android:drawable/ic_input_add" />
 </RelativeLayout>
