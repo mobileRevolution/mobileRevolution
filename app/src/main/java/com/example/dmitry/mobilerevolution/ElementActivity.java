@@ -26,8 +26,6 @@ public class ElementActivity  extends AppCompatActivity {
         description=(TextView) findViewById(R.id.elementDescription);
 
         String imagename=getIntent().getStringExtra("Image");
-
-
         image.setImageResource(Integer.parseInt(imagename));
         nameOfProduct.setText(getIntent().getStringExtra("nameOfProduct"));
         description.setText(getIntent().getStringExtra("descriptionOfProduct"));

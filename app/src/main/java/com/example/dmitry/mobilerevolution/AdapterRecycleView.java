@@ -1,18 +1,14 @@
 package com.example.dmitry.mobilerevolution;
 
-import android.app.LauncherActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -35,7 +31,7 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.element,parent,false);
+        View view = inflater.inflate(R.layout.element_of_recyclerview,parent,false);
         return new ViewHolder(view);
     }
 

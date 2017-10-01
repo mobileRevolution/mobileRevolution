@@ -18,7 +18,7 @@ public class Product {
 
     }
 
-    public Product(String name, Image photo,String description)
+    public Product(String name, Image photo, String description)
     {
         setName(name);
         setPhoto(photo);
@@ -41,9 +41,11 @@ public class Product {
     public void setPhoto(Image photo) {
         this.photo = photo;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
+
     public String getDescription() {
         return description;
     }
