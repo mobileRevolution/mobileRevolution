@@ -3,7 +3,11 @@ package com.example.dmitry.mobilerevolution;
 import android.app.LauncherActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 /**
@@ -44,7 +49,7 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
         Product product = products.get(position);
         holder.nameOfProduct.setText(product.getName());
         holder.photoProduct.setTag(R.drawable.bread);
-        holder.photoProduct.setImageResource(R.drawable.bread);
+        holder.photoProduct.setImageDrawable(product.getPhoto());
         holder.setDescription(product.getDescription());
     }
 
@@ -77,10 +82,14 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
 
         @Override
         public void onClick(View view) {
+            photoProduct.buildDrawingCache();
+            Bitmap photo= photoProduct.getDrawingCache();
+            Bundle extras = new Bundle();
+            extras.putString("nameOfProduct",nameOfProduct.getText().toString());
+            extras.putString("descriptionOfProduct",description);
+            extras.putParcelable("photoOfProduct", photo);
             Intent intent=new Intent(view.getContext(),ElementActivity.class);
-            intent.putExtra("nameOfProduct",nameOfProduct.getText().toString());
-            intent.putExtra("Image",photoProduct.getTag().toString());
-            intent.putExtra("descriptionOfProduct",description);
+            intent.putExtras(extras);
             view.getContext().startActivity(intent);//тут будет вызываться новое активитии с подробной информацией
 
         }
