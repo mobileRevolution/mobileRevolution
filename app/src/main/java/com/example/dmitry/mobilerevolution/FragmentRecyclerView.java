@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class FragmentRecyclerView extends Fragment {
 
-    List<Product> products;
+    List<Product> products; // должен быть модификатор private
     public FragmentRecyclerView()
     {
 
@@ -108,7 +109,7 @@ public class FragmentRecyclerView extends Fragment {
 
     private HashMap<String, Drawable> getMapPhotos(){
         HashMap<String,Drawable> result=new HashMap<>();
-        result.put("bread",getResources().getDrawable(R.drawable.bread));
+        result.put("bread",getResources().getDrawable(R.drawable.bread)); // необходимо использовать         ContextCompat.getDrawable(getContext(), R.drawable.bread);
         result.put("apple",getResources().getDrawable(R.drawable.apple));
         result.put("lemon",getResources().getDrawable(R.drawable.lemon));
         result.put("pineapple",getResources().getDrawable(R.drawable.pineapple));
@@ -118,7 +119,7 @@ public class FragmentRecyclerView extends Fragment {
         result.put("tea",getResources().getDrawable(R.drawable.tea));
         result.put("coffe",getResources().getDrawable(R.drawable.coffe));
         for(Drawable dr:result.values()){
-            dr.setBounds(0,0,60,60);
+            dr.setBounds(0,0,60,60); // размеры должны задаваться в ImageView
         }
         return result;
     }
