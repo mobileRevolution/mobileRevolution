@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,7 +45,7 @@ public class FragmentRecyclerView extends Fragment {
         RecyclerView rv = viewGroup.findViewById(R.id.fragmentRecyclerView);
         if(getActivity().getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){
             Fragment f=new ElementFragment();
-            getActivity().getSupportFragmentManager().beginTransaction().add(R.id.fragment_container1,f);
+            this.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.fragment_container1,f);
         }
         products = new ArrayList<>();
         setTestData();

@@ -114,7 +114,6 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
                 extras.putParcelable("photoOfProduct", watermarkimage);
                 f.setArguments(extras);
                 fragmentManager.beginTransaction().replace(R.id.fragment_container1,f).commit();
-
             }
 
         }
