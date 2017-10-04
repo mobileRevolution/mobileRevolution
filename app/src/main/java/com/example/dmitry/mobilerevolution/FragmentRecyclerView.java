@@ -1,14 +1,18 @@
 package com.example.dmitry.mobilerevolution;
 
+import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,7 +25,9 @@ import java.util.List;
 
 public class FragmentRecyclerView extends Fragment {
 
-    List<Product> products; // должен быть модификатор private
+    private List<Product> products; // должен быть модификатор private
+
+
     public FragmentRecyclerView()
     {
 
@@ -35,15 +41,19 @@ public class FragmentRecyclerView extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         //привязываю RecycleView к фрагменту
         ViewGroup viewGroup = (ViewGroup)inflater.inflate(R.layout.fragment_recycleview,container, false);
         RecyclerView rv = viewGroup.findViewById(R.id.fragmentRecyclerView);
+        if(getActivity().getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){
+            Fragment f=new ElementFragment();
+            getActivity().getSupportFragmentManager().beginTransaction().add(R.id.fragment_container1,f);
+        }
         products = new ArrayList<>();
         setTestData();
 
         //привязываю адаптер для RecycleView
         AdapterRecycleView adapter = new AdapterRecycleView(getContext(), products);
+        adapter.setManager(getFragmentManager());
         rv.setAdapter(adapter);
 
         return viewGroup;
@@ -109,15 +119,15 @@ public class FragmentRecyclerView extends Fragment {
 
     private HashMap<String, Drawable> getMapPhotos(){
         HashMap<String,Drawable> result=new HashMap<>();
-        result.put("bread",getResources().getDrawable(R.drawable.bread)); // необходимо использовать         ContextCompat.getDrawable(getContext(), R.drawable.bread);
-        result.put("apple",getResources().getDrawable(R.drawable.apple));
-        result.put("lemon",getResources().getDrawable(R.drawable.lemon));
-        result.put("pineapple",getResources().getDrawable(R.drawable.pineapple));
-        result.put("milk",getResources().getDrawable(R.drawable.milk));
-        result.put("lime",getResources().getDrawable(R.drawable.lime));
-        result.put("sweets",getResources().getDrawable(R.drawable.sweets));
-        result.put("tea",getResources().getDrawable(R.drawable.tea));
-        result.put("coffe",getResources().getDrawable(R.drawable.coffe));
+        result.put("bread",ContextCompat.getDrawable(getContext(),R.drawable.bread)); // необходимо использовать         ContextCompat.getDrawable(getContext(), R.drawable.bread);
+        result.put("apple",ContextCompat.getDrawable(getContext(),R.drawable.apple));
+        result.put("lemon",ContextCompat.getDrawable(getContext(),R.drawable.lemon));
+        result.put("pineapple",ContextCompat.getDrawable(getContext(),R.drawable.pineapple));
+        result.put("milk",ContextCompat.getDrawable(getContext(),R.drawable.milk));
+        result.put("lime",ContextCompat.getDrawable(getContext(),R.drawable.lime));
+        result.put("sweets",ContextCompat.getDrawable(getContext(),R.drawable.sweets));
+        result.put("tea",ContextCompat.getDrawable(getContext(),R.drawable.tea));
+        result.put("coffe",ContextCompat.getDrawable(getContext(),R.drawable.coffe));
         for(Drawable dr:result.values()){
             dr.setBounds(0,0,60,60); // размеры должны задаваться в ImageView
         }

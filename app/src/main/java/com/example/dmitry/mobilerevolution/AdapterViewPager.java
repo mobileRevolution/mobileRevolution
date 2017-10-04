@@ -14,7 +14,7 @@ import java.util.List;
 
 public class AdapterViewPager extends FragmentStatePagerAdapter {
 
-    private List<FragmentRecyclerView> listFragmentRecyclerView = new ArrayList<>();
+    private List<Fragment> listFragmentRecyclerView = new ArrayList<>();
     private List<String> titles = new ArrayList<>();
 
     public AdapterViewPager(FragmentManager fm) {
@@ -36,8 +36,8 @@ public class AdapterViewPager extends FragmentStatePagerAdapter {
         return titles.get(position);
     }
 
-    public void addFragment(FragmentRecyclerView fragmentRecyclerView, String title){
-        listFragmentRecyclerView.add(fragmentRecyclerView);
+    public void addFragment(Fragment fragment, String title){
+        listFragmentRecyclerView.add(fragment);
         titles.add(title);
     }
 }

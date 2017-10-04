@@ -2,8 +2,11 @@ package com.example.dmitry.mobilerevolution;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +33,7 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
 
     private LayoutInflater inflater;
     private List<Product> products;
-
+    private FragmentManager fragmentManager;
     public AdapterRecycleView(Context context, List<Product> list)
     {
         this.inflater = LayoutInflater.from(context);
@@ -38,6 +41,9 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
 
     }
 
+    public void setManager(FragmentManager manager){
+        this.fragmentManager=manager;
+    }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.element_of_recyclerview,parent,false);
@@ -73,9 +79,9 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
         private String description;
         public ViewHolder(View itemView) {
             super(itemView);
-            this.photoProduct = (ImageView)itemView.findViewById(R.id.elementImageViewPhoto); // начиная с 26 support library можно убрать явный каст
-            this.nameOfProduct = (TextView)itemView.findViewById(R.id.elementTextViewName);
-            this.buttonAdd = (ImageButton)itemView.findViewById(R.id.elementImageButtonAdd);
+            this.photoProduct = itemView.findViewById(R.id.elementImageViewPhoto); // начиная с 26 support library можно убрать явный каст
+            this.nameOfProduct =itemView.findViewById(R.id.elementTextViewName);
+            this.buttonAdd = itemView.findViewById(R.id.elementImageButtonAdd);
             this.viewBackground = itemView.findViewById(R.id.elementView);
             viewBackground.setOnClickListener(this);
         }
@@ -86,22 +92,30 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
 
         @Override
         public void onClick(View view) {
-            photoProduct.buildDrawingCache();
-            Bitmap photo= photoProduct.getDrawingCache();
-            Bundle extras = new Bundle();
-            extras.putString("nameOfProduct",nameOfProduct.getText().toString());
-            extras.putString("descriptionOfProduct",description);
-            extras.putParcelable("photoOfProduct", photo);
-            Intent intent=new Intent(view.getContext(),ElementActivity.class);
-            // Переходы лучше вынести в активити (роутер)
-            // при переходе в другую активити, если необходимо передать параметры,
-            // то создается статический метод ElementActivity.createStartIntent(Context context, String id);
-            // как пример. Названия полей (nameOfProduct и т.д.) всегда используются в виде констант
-            // и хранятся в активити, которая генерирует стартовый Intent и достает из него данные
-            // private static final String BUNDLE_NAME = "bundle_name;
-            // Клик из адаптера передается через интерфейс в активити / фрагмент
-            intent.putExtras(extras);
-            view.getContext().startActivity(intent);//тут будет вызываться новое активитии с подробной информацией
+            if( view.getResources().getConfiguration().orientation== Configuration.ORIENTATION_PORTRAIT) {
+                photoProduct.buildDrawingCache();
+                Bitmap photo = photoProduct.getDrawingCache();
+                Bitmap watermarkimage = photo.copy(photo.getConfig(), true);
+                Bundle extras = new Bundle();
+                extras.putString("nameOfProduct", nameOfProduct.getText().toString());
+                extras.putString("descriptionOfProduct", description);
+                extras.putParcelable("photoOfProduct", watermarkimage );
+                Intent intent = new Intent(view.getContext(), ElementActivity.class);
+                intent.putExtras(extras);
+                view.getContext().startActivity(intent);//тут будет вызываться новое активитии с подробной информацией
+            } else{
+                Fragment f=new ElementFragment();
+                photoProduct.buildDrawingCache();
+                Bitmap photo = photoProduct.getDrawingCache();
+                Bitmap watermarkimage = photo.copy(photo.getConfig(), true);
+                Bundle extras = new Bundle();
+                extras.putString("nameOfProduct", nameOfProduct.getText().toString());
+                extras.putString("descriptionOfProduct", description);
+                extras.putParcelable("photoOfProduct", watermarkimage);
+                f.setArguments(extras);
+                fragmentManager.beginTransaction().replace(R.id.fragment_container1,f).commit();
+
+            }
 
         }
     }

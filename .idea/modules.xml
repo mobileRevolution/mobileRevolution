@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/MobileRevolution.iml" filepath="$PROJECT_DIR$/MobileRevolution.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/mobileRevolution.iml" filepath="$PROJECT_DIR$/mobileRevolution.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test1.iml" filepath="$PROJECT_DIR$/test1.iml" />
     </modules>
   </component>
 </project>
