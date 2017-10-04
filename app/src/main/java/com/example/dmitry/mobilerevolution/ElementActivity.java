@@ -1,5 +1,7 @@
 package com.example.dmitry.mobilerevolution;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,16 +14,26 @@ import android.widget.TextView;
 public class ElementActivity  extends AppCompatActivity {
     /*private static final String BUNDLE_ID = "bundle_id";*/
 
-    private TextView nameOfProduct;
-    private ImageView image;
-    private TextView description;
+    private static TextView nameOfProduct;
+    private static ImageView image;
+    private static TextView description;
+    private static String name="nameOfProduct";
+    private static String descriptionOfProduct="descriptionOfProduct";
+    private static String imageOfProduct="imageOfProduct";
 
-    /*public static Intent createStartIntent(Context context, String id) {
+    public static Intent createStartIntent(Context context, String nameOfProduct, String description, Bitmap image) {
         Intent intent = new Intent(context, ElementActivity.class);
-        intent.putExtra(BUNDLE_ID, id);
+        intent.putExtra(ElementActivity.name, nameOfProduct);
+        intent.putExtra(ElementActivity.descriptionOfProduct,description);
+        intent.putExtra(ElementActivity.imageOfProduct,image);
         return intent;
-    }*/
+    }
 
+    public void beforeStart(Bundle extras){
+        nameOfProduct.setText(extras.getString(name));
+        description.setText(extras.getString(descriptionOfProduct));
+        image.setImageBitmap((Bitmap)extras.getParcelable(imageOfProduct));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,9 +45,7 @@ public class ElementActivity  extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
 
         // Этот код выносится в отдельный метод, названия полей задаются константами
-        image.setImageBitmap((Bitmap) extras.getParcelable("photoOfProduct"));
-        nameOfProduct.setText(extras.getString("nameOfProduct"));
-        description.setText(extras.getString("descriptionOfProduct"));
+        beforeStart(extras);
 
     }
 

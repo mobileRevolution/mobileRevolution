@@ -125,9 +125,6 @@ public class FragmentRecyclerView extends Fragment {
         result.put("sweets",ContextCompat.getDrawable(getContext(),R.drawable.sweets));
         result.put("tea",ContextCompat.getDrawable(getContext(),R.drawable.tea));
         result.put("coffe",ContextCompat.getDrawable(getContext(),R.drawable.coffe));
-        for(Drawable dr:result.values()){
-            dr.setBounds(0,0,60,60); // размеры должны задаваться в ImageView
-        }
         return result;
     }
 }
