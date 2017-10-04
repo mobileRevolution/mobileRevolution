@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -43,6 +44,8 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
 
     public void setManager(FragmentManager manager){
         this.fragmentManager=manager;
+
+
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -84,6 +87,17 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
             this.buttonAdd = itemView.findViewById(R.id.elementImageButtonAdd);
             this.viewBackground = itemView.findViewById(R.id.elementView);
             viewBackground.setOnClickListener(this);
+            if(itemView.getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE) {
+                init(new Product("Bread", null, "Bread is a staple food prepared from a dough of flour and water, usually by baking. Throughout recorded history it has been popular around the world and is one of the oldest artificial foods, having been of importance since the dawn of agriculture.\n" +
+                        "\n" +
+                        "Proportions of types of flour and other ingredients vary widely, as do modes of preparation. As a result, types, shapes, sizes, " +
+                        "and textures of breads differ around the world. Bread may be leavened by processes such as reliance on naturally occurring sourdough " +
+                        "microbes, chemicals, industrially produced yeast, or high-pressure aeration. Some bread is cooked before it can leaven, including for traditional or religious " +
+                        "reasons. Non-cereal ingredients such as fruits, nuts and fats may be included." +
+                        " Commercial bread commonly contains additives to improve flavor, " +
+                        "texture, color, shelf life, and ease of manufacturing."));
+            }
+
         }
 
         public void setDescription(String description){
@@ -117,5 +131,15 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
             }
 
         }
+        public void init(Product p){
+            Fragment f=new ElementFragment();
+            Bundle extras = new Bundle();
+            extras.putString("nameOfProduct", p.getName());
+            extras.putString("descriptionOfProduct", p.getDescription());
+            extras.putParcelable("photoOfProduct", null);
+            f.setArguments(extras);
+            fragmentManager.beginTransaction().replace(R.id.fragment_container1,f).commit();
+        }
+
     }
 }

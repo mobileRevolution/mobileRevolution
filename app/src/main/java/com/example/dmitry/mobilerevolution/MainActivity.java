@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
 
         AdapterViewPager adapterViewPager = new AdapterViewPager(getSupportFragmentManager());
          //два подэкрана, поэтому два элемента
-
         adapterViewPager.addFragment(new FragmentRecyclerView(), getString(R.string.first_list));
         adapterViewPager.addFragment(new FragmentRecyclerView(), getString(R.string.second_list));
         viewPager.setAdapter(adapterViewPager);

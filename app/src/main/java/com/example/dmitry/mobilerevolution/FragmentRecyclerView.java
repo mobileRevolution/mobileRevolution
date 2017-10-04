@@ -49,12 +49,10 @@ public class FragmentRecyclerView extends Fragment {
         }
         products = new ArrayList<>();
         setTestData();
-
         //привязываю адаптер для RecycleView
         AdapterRecycleView adapter = new AdapterRecycleView(getContext(), products);
-        adapter.setManager(getFragmentManager());
+        adapter.setManager(this.getActivity().getSupportFragmentManager());
         rv.setAdapter(adapter);
-
         return viewGroup;
     }
 
