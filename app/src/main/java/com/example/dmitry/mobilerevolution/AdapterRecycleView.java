@@ -85,14 +85,7 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
             this.viewBackground = itemView.findViewById(R.id.elementView);
             viewBackground.setOnClickListener(this);
             if (itemView.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                init1(new Product("Bread", null, "Bread is a staple food prepared from a dough of flour and water, usually by baking. Throughout recorded history it has been popular around the world and is one of the oldest artificial foods, having been of importance since the dawn of agriculture.\n" +
-                        "\n" +
-                        "Proportions of types of flour and other ingredients vary widely, as do modes of preparation. As a result, types, shapes, sizes, " +
-                        "and textures of breads differ around the world. Bread may be leavened by processes such as reliance on naturally occurring sourdough " +
-                        "microbes, chemicals, industrially produced yeast, or high-pressure aeration. Some bread is cooked before it can leaven, including for traditional or religious " +
-                        "reasons. Non-cereal ingredients such as fruits, nuts and fats may be included." +
-                        " Commercial bread commonly contains additives to improve flavor, " +
-                        "texture, color, shelf life, and ease of manufacturing."));
+                initWithStartProduct(products.get(0));
             }
 
         }
@@ -103,35 +96,22 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
 
         @Override
         public void onClick(View view) {
+            photoProduct.buildDrawingCache();
+            Bitmap photo = photoProduct.getDrawingCache();
+            Bitmap watermarkimage = photo.copy(photo.getConfig(), true);
             if (view.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                photoProduct.buildDrawingCache();
-                Bitmap photo = photoProduct.getDrawingCache();
-                Bitmap watermarkimage = photo.copy(photo.getConfig(), true);
                 Intent intent = ElementActivity.createStartIntent(view.getContext(), nameOfProduct.getText().toString(), description, watermarkimage);
                 view.getContext().startActivity(intent);//тут будет вызываться новое активитии с подробной информацией
             } else {
-                Fragment f = new ElementFragment();
-                photoProduct.buildDrawingCache();
-                Bitmap photo = photoProduct.getDrawingCache();
-                Bitmap watermarkimage = photo.copy(photo.getConfig(), true);
-                Bundle extras = new Bundle();
-                extras.putString("nameOfProduct", nameOfProduct.getText().toString());
-                extras.putString("descriptionOfProduct", description);
-                extras.putParcelable("photoOfProduct", watermarkimage);
-                f.setArguments(extras);
-                fragmentManager.beginTransaction().replace(R.id.fragment_container1, f).commit();
+                Fragment elementFragment=ElementFragment.createStartFragment( nameOfProduct.getText().toString(),description, watermarkimage);
+                fragmentManager.beginTransaction().replace(R.id.fragment_container1, elementFragment).commit();
             }
 
         }
 
-        public void init1(Product p) {
-            Fragment f = new ElementFragment();
-            Bundle extras = new Bundle();
-            extras.putString("nameOfProduct", p.getName());
-            extras.putString("descriptionOfProduct", p.getDescription());
-            extras.putParcelable("photoOfProduct", null);
-            f.setArguments(extras);
-            fragmentManager.beginTransaction().replace(R.id.fragment_container1, f).commit();
+        public void initWithStartProduct(Product p) {
+            Fragment elementFragment=ElementFragment.createStartFragment(p.getName(),p.getDescription(),null);
+            fragmentManager.beginTransaction().replace(R.id.fragment_container1, elementFragment).commit();
         }
 
         public void init(Product product) {

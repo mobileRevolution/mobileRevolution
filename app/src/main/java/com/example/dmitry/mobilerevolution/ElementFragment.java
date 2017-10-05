@@ -2,6 +2,7 @@ package com.example.dmitry.mobilerevolution;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -20,7 +21,32 @@ public class ElementFragment extends Fragment {
     private static TextView nameOfProduct;
     private static ImageView image;
     private static TextView description;
+    private static String name="nameOfProduct";
+    private static String descriptionOfProduct="descriptionOfProduct";
+    private static String imageOfProduct="imageOfProduct";
 
+    public static Fragment createStartFragment(String nameOfProduct, String description, Bitmap image){
+        Fragment elementFragment = new ElementFragment();
+        Bundle extras = new Bundle();
+        extras.putString(name, nameOfProduct);
+        extras.putString(descriptionOfProduct, description);
+        extras.putParcelable(imageOfProduct, image);
+        elementFragment.setArguments(extras);
+        return elementFragment;
+    }
+
+    public void beforeStart(Bundle extras){
+        if (extras!= null) {
+            Parcelable imageProduct=extras.getParcelable(imageOfProduct);
+
+            if(imageProduct!=null)
+                image.setImageBitmap((Bitmap)imageProduct );
+            else
+                image.setImageResource(R.drawable.bread);
+            nameOfProduct.setText(extras.getString(name));
+            description.setText(extras.getString(descriptionOfProduct));
+        }
+    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,15 +60,7 @@ public class ElementFragment extends Fragment {
         image = (ImageView) viewGroup.findViewById(R.id.elementPhoto);
         description = (TextView) viewGroup.findViewById(R.id.elementDescription);
         Bundle bundle = getArguments();
-        if (bundle != null) {
-
-            if(bundle.getParcelable("photoOfProduct")!=null)
-            image.setImageBitmap((Bitmap) bundle.getParcelable("photoOfProduct"));
-            else
-                image.setImageResource(R.drawable.bread);
-            nameOfProduct.setText(bundle.getString("nameOfProduct"));
-            description.setText(bundle.getString("descriptionOfProduct"));
-        }
+        beforeStart(bundle);
         return viewGroup;
     }
 }
