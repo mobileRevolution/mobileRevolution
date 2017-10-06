@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +17,7 @@ import android.widget.TextView;
 
 public class ElementFragment extends Fragment {
 
+    // Опять же не стоит делать статические ссылки на View
     private static TextView nameOfProduct;
     private static ImageView image;
     private static TextView description;
@@ -39,6 +39,7 @@ public class ElementFragment extends Fragment {
         if (extras!= null) {
             Parcelable imageProduct=extras.getParcelable(imageOfProduct);
 
+            // if лучше всегда обрамлять в скобки, даже если в нем одна строка
             if(imageProduct!=null)
                 image.setImageBitmap((Bitmap)imageProduct );
             else

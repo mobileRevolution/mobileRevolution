@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
@@ -96,10 +94,13 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
 
         @Override
         public void onClick(View view) {
+            // если хранить id изображения в entity
+            // то можно получить изображение с помощью
+            // products.get(getAdapterPosition()).getImage(); -- ссылка на ресурс изображения
             photoProduct.buildDrawingCache();
-            Bitmap photo = photoProduct.getDrawingCache();
+            Bitmap photo = photoProduct.getDrawingCache(); // это слишком долгие операции для элементов списка
             Bitmap watermarkimage = photo.copy(photo.getConfig(), true);
-            if (view.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            if (view.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) { // этот код лучше вынести в родительскую Activity / Fragment
                 Intent intent = ElementActivity.createStartIntent(view.getContext(), nameOfProduct.getText().toString(), description, watermarkimage);
                 view.getContext().startActivity(intent);//тут будет вызываться новое активитии с подробной информацией
             } else {

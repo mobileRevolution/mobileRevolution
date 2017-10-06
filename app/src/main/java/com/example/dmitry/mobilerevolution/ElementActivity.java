@@ -14,9 +14,13 @@ import android.widget.TextView;
 public class ElementActivity  extends AppCompatActivity {
     /*private static final String BUNDLE_ID = "bundle_id";*/
 
+    /* Нельзя делать статические ссылки на View, иначе может быть утечка памяти*/
     private static TextView nameOfProduct;
     private static ImageView image;
     private static TextView description;
+    /* Переменные для bundle должны быть final,
+    иначе они могут быть изменены и парсинг бандла сломается
+    Пример создания и приводил выше для ID*/
     private static String name="nameOfProduct";
     private static String descriptionOfProduct="descriptionOfProduct";
     private static String imageOfProduct="imageOfProduct";
@@ -32,6 +36,9 @@ public class ElementActivity  extends AppCompatActivity {
     public void beforeStart(Bundle extras){
         nameOfProduct.setText(extras.getString(name));
         description.setText(extras.getString(descriptionOfProduct));
+        // довольно опасно хранить Bitmap в Bundle
+        // Максимальный размер bundle ~ 1mb
+        // битмап может быть и 20 mb
         image.setImageBitmap((Bitmap)extras.getParcelable(imageOfProduct));
     }
     @Override

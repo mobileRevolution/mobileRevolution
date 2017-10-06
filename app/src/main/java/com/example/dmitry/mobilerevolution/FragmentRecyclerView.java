@@ -5,13 +5,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,7 +43,7 @@ public class FragmentRecyclerView extends Fragment {
         RecyclerView rv = viewGroup.findViewById(R.id.fragmentRecyclerView);
         if(getActivity().getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){
             Fragment f=new ElementFragment();
-            this.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.fragment_container1,f);
+            this.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.fragment_container1,f); // а где commit?
         }
         products = new ArrayList<>();
         setTestData();
