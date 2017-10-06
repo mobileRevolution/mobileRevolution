@@ -1,4 +1,4 @@
-package com.example.dmitry.mobilerevolution;
+package com.example.dmitry.mobilerevolution.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.dmitry.mobilerevolution.R;
+
 /**
  * Created by user on 01.10.2017.
  */

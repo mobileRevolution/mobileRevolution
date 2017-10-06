@@ -1,11 +1,7 @@
-package com.example.dmitry.mobilerevolution;
+package com.example.dmitry.mobilerevolution.view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +12,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
+import com.example.dmitry.mobilerevolution.R;
+import com.example.dmitry.mobilerevolution.model.Product;
+import com.example.dmitry.mobilerevolution.repository.ProductRepositoryImpl;
+import com.example.dmitry.mobilerevolution.repository.interfaces.ProductRepository;
+import com.example.dmitry.mobilerevolution.view.interfaces.ViewAdapter;
 
 /**
  * Created by dmitry on 30.09.17.
@@ -29,23 +29,21 @@ import java.util.List;
  * не обязательно, но нужно иметь ввиду.
  * К тому же, можно использовать комбинацию Ctrl + Alt + L для форматирования.
  */
-public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.ViewHolder> {
+public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.ViewHolder>implements ViewAdapter {
 
 
     private LayoutInflater inflater;
-    private List<Product> products;
     private FragmentManager fragmentManager;
+    private ProductRepository repository;
 
-    public AdapterRecycleView(Context context, List<Product> list) {
+    public AdapterRecycleView(Context context){
         this.inflater = LayoutInflater.from(context);
-        this.products = list;
+        repository=new ProductRepositoryImpl(context,this);
 
     }
-
     public void setManager(FragmentManager manager) {
         this.fragmentManager = manager;
-
-
+        repository.setFragmentManager(manager);
     }
 
     @Override
@@ -56,19 +54,27 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.init(products.get(position));
+        repository.initProduct(holder,position);
         // Лучше в классе ViewHolder добавить метод
         // void init(Product product);
         // и перенести туда эту логику, потому что иначе если будет несколько типов ViewHolder'ов,
         // то здесь будет много кода
     }
 
+    public void setProductComponent(){
+
+    }
 
     @Override
     public int getItemCount() {
-        return products.size();
+        return repository.getSizeOfProducts();
     }
 
+    public void addFragment(Product p){
+        Fragment elementFragment= ElementFragment.createStartFragment(p.getName(),p.getDescription(),null);
+        fragmentManager.beginTransaction().replace(R.id.fragment_container1, elementFragment).commit();
+
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         final ImageView photoProduct;
@@ -85,7 +91,7 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
             this.viewBackground = itemView.findViewById(R.id.elementView);
             viewBackground.setOnClickListener(this);
             if (itemView.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                initWithStartProduct(products.get(0));
+                repository.initWithStartProduct();
             }
 
         }
@@ -96,28 +102,30 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
 
         @Override
         public void onClick(View view) {
-            photoProduct.buildDrawingCache();
-            Bitmap photo = photoProduct.getDrawingCache();
-            Bitmap watermarkimage = photo.copy(photo.getConfig(), true);
-            if (view.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                Intent intent = ElementActivity.createStartIntent(view.getContext(), nameOfProduct.getText().toString(), description, watermarkimage);
-                view.getContext().startActivity(intent);//тут будет вызываться новое активитии с подробной информацией
-            } else {
-                Fragment elementFragment=ElementFragment.createStartFragment( nameOfProduct.getText().toString(),description, watermarkimage);
-                fragmentManager.beginTransaction().replace(R.id.fragment_container1, elementFragment).commit();
-            }
-
+            repository.initWithProduct(this,view);
         }
-
-        public void initWithStartProduct(Product p) {
-            Fragment elementFragment=ElementFragment.createStartFragment(p.getName(),p.getDescription(),null);
-            fragmentManager.beginTransaction().replace(R.id.fragment_container1, elementFragment).commit();
-        }
-
         public void init(Product product) {
             nameOfProduct.setText(product.getName());
             photoProduct.setImageDrawable(product.getPhoto());
             setDescription(product.getDescription());
+        }
+        public String getDescription() {
+            return description;
+        }
+        public ImageView getPhotoProduct() {
+            return photoProduct;
+        }
+
+        public TextView getNameOfProduct() {
+            return nameOfProduct;
+        }
+
+        public ImageButton getButtonAdd() {
+            return buttonAdd;
+        }
+
+        public View getViewBackground() {
+            return viewBackground;
         }
     }
 }

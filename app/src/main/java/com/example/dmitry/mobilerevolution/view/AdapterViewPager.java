@@ -1,4 +1,4 @@
-package com.example.dmitry.mobilerevolution;
+package com.example.dmitry.mobilerevolution.view;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

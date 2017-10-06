@@ -1,16 +1,17 @@
-package com.example.dmitry.mobilerevolution;
+package com.example.dmitry.mobilerevolution.view;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.dmitry.mobilerevolution.R;
 
 /**
  * Created by user on 04.10.2017.

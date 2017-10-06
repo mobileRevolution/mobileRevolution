@@ -1,65 +1,35 @@
-package com.example.dmitry.mobilerevolution;
+package com.example.dmitry.mobilerevolution.model;
 
-import android.content.res.Configuration;
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
+import com.example.dmitry.mobilerevolution.R;
+import com.example.dmitry.mobilerevolution.model.interfaces.ModelProductStub;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
 /**
- * Created by dmitry on 01.10.17.
+ * Created by user on 06.10.2017.
  */
 
-public class FragmentRecyclerView extends Fragment {
+public class ModelProductStubImpl implements ModelProductStub {
+    private List<Product> products;
+    private Context context;
 
-    private List<Product> products; // должен быть модификатор private
-
-
-    public FragmentRecyclerView()
-    {
-
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //привязываю RecycleView к фрагменту
-        ViewGroup viewGroup = (ViewGroup)inflater.inflate(R.layout.fragment_recycleview,container, false);
-        RecyclerView rv = viewGroup.findViewById(R.id.fragmentRecyclerView);
-        if(getActivity().getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){
-            Fragment f=new ElementFragment();
-            this.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.fragment_container1,f);
-        }
-        products = new ArrayList<>();
+    public ModelProductStubImpl(Context context){
+        this.context=context;
+        products=new ArrayList<>();
         setTestData();
-        //привязываю адаптер для RecycleView
-        AdapterRecycleView adapter = new AdapterRecycleView(getContext(), products);
-        adapter.setManager(this.getActivity().getSupportFragmentManager());
-        rv.setAdapter(adapter);
-        return viewGroup;
     }
-
-
-    //временное заполнение тестовыми данными список продуктов
+    @Override
+    public List<Product> getProducts() {
+        return products;
+    }
     private void setTestData() {
-        // Product p = new Product();
         HashMap<String,Drawable> mapPhoto=getMapPhotos();
 
         products.add(new Product("Bread",mapPhoto.get("bread") ,"Bread is a staple food prepared from a dough of flour and water, usually by baking. Throughout recorded history it has been popular around the world and is one of the oldest artificial foods, having been of importance since the dawn of agriculture.\n" +
@@ -116,15 +86,15 @@ public class FragmentRecyclerView extends Fragment {
 
     private HashMap<String, Drawable> getMapPhotos(){
         HashMap<String,Drawable> result=new HashMap<>();
-        result.put("bread",ContextCompat.getDrawable(getContext(),R.drawable.bread)); // необходимо использовать         ContextCompat.getDrawable(getContext(), R.drawable.bread);
-        result.put("apple",ContextCompat.getDrawable(getContext(),R.drawable.apple));
-        result.put("lemon",ContextCompat.getDrawable(getContext(),R.drawable.lemon));
-        result.put("pineapple",ContextCompat.getDrawable(getContext(),R.drawable.pineapple));
-        result.put("milk",ContextCompat.getDrawable(getContext(),R.drawable.milk));
-        result.put("lime",ContextCompat.getDrawable(getContext(),R.drawable.lime));
-        result.put("sweets",ContextCompat.getDrawable(getContext(),R.drawable.sweets));
-        result.put("tea",ContextCompat.getDrawable(getContext(),R.drawable.tea));
-        result.put("coffe",ContextCompat.getDrawable(getContext(),R.drawable.coffe));
+        result.put("bread", ContextCompat.getDrawable(context, R.drawable.bread)); // необходимо использовать         ContextCompat.getDrawable(getContext(), R.drawable.bread);
+        result.put("apple",ContextCompat.getDrawable(context,R.drawable.apple));
+        result.put("lemon",ContextCompat.getDrawable(context,R.drawable.lemon));
+        result.put("pineapple",ContextCompat.getDrawable(context,R.drawable.pineapple));
+        result.put("milk",ContextCompat.getDrawable(context,R.drawable.milk));
+        result.put("lime",ContextCompat.getDrawable(context,R.drawable.lime));
+        result.put("sweets",ContextCompat.getDrawable(context,R.drawable.sweets));
+        result.put("tea",ContextCompat.getDrawable(context,R.drawable.tea));
+        result.put("coffe",ContextCompat.getDrawable(context,R.drawable.coffe));
         return result;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.dmitry.mobilerevolution;
+package com.example.dmitry.mobilerevolution.model;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
