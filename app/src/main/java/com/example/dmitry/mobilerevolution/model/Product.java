@@ -1,9 +1,6 @@
 package com.example.dmitry.mobilerevolution.model;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 
 /**
  * Created by dmitry on 30.09.17.
@@ -12,6 +9,7 @@ import android.media.Image;
 public class Product {
 
     private String name;
+    /* Забыл указать, что в DAO-классе лучше хранить идентификатор изображения*/
     private Drawable photo;
     private String description;
 
