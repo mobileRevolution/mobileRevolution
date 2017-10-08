@@ -19,6 +19,9 @@ import com.example.dmitry.mobilerevolution.view.interfaces.ViewAdapter;
 
 import java.util.List;
 
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
 /**
  * Created by user on 06.10.2017.
  */
@@ -39,13 +42,18 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public void initProduct(AdapterRecycleView.ViewHolder holder, int position) {
-        List<Product> products = modelProductStub.getProducts();
-        holder.init(products.get(position));
+        modelProductStub.getProducts().subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        products->{
+                            holder.init(products.get(position));
+                        }
+                );
+
     }
 
     public int getSizeOfProducts() {
-        List<Product> products = modelProductStub.getProducts();
-        return products.size();
+      return modelProductStub.getProductsSize();
     }
 
     @Override
@@ -64,8 +72,14 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     public void initWithStartProduct() {
-        Product p = modelProductStub.getProducts().get(0);
-        adapter.addFragment(p);
+        modelProductStub.getProducts().subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        products->{
+                            adapter.addFragment(products.get(0));
+                        }
+                );
+
     }
 
 

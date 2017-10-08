@@ -12,11 +12,11 @@ import android.media.Image;
 public class Product {
 
     private String name;
-    private Drawable photo;
+    private String photo;
     private String description;
 
 
-    public Product(String name, Drawable photo, String description) {
+    public Product(String name, String photo, String description) {
         this.name = name;
         this.photo = photo;
         this.description = description;
@@ -31,11 +31,11 @@ public class Product {
         this.name = name;
     }
 
-    public Drawable getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Drawable photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
