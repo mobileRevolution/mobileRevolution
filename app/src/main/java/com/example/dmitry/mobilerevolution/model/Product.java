@@ -15,15 +15,11 @@ public class Product {
     private Drawable photo;
     private String description;
 
-    public Product(){
 
-    }
-
-    public Product(String name, Drawable photo, String description)
-    {
-        setName(name);
-        setPhoto(photo);
-        setDescription(description);
+    public Product(String name, Drawable photo, String description) {
+        this.name = name;
+        this.photo = photo;
+        this.description = description;
     }
 
 

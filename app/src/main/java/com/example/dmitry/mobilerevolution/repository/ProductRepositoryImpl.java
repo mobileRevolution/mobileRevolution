@@ -28,41 +28,46 @@ public class ProductRepositoryImpl implements ProductRepository {
     private ModelProductStub modelProductStub;
     private ViewAdapter adapter;
     private FragmentManager fragmentManager;
-    public void setFragmentManager(FragmentManager manager){
-        this.fragmentManager=manager;
+
+    public void setFragmentManager(FragmentManager manager) {
+        this.fragmentManager = manager;
     }
-    public ProductRepositoryImpl(Context context, ViewAdapter adapter){
-        modelProductStub=new ModelProductStubImpl(context);
-        this.adapter=adapter;
+
+    public ProductRepositoryImpl(Context context, ViewAdapter adapter) {
+        modelProductStub = new ModelProductStubImpl(context);
+        this.adapter = adapter;
     }
+
     @Override
-    public void initProduct(AdapterRecycleView.ViewHolder holder,int position) {
-        List<Product> products=modelProductStub.getProducts();
+    public void initProduct(AdapterRecycleView.ViewHolder holder, int position) {
+        List<Product> products = modelProductStub.getProducts();
         holder.init(products.get(position));
     }
-    public int getSizeOfProducts(){
-        List<Product> products=modelProductStub.getProducts();
+
+    public int getSizeOfProducts() {
+        List<Product> products = modelProductStub.getProducts();
         return products.size();
     }
 
     @Override
-    public void initWithProduct(AdapterRecycleView.ViewHolder holder,View view) {
+    public void initWithProduct(AdapterRecycleView.ViewHolder holder, View view) {
         holder.getPhotoProduct().buildDrawingCache();
         Bitmap photo = holder.getPhotoProduct().getDrawingCache();
         Bitmap watermarkimage = photo.copy(photo.getConfig(), true);
+
         if (view.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             Intent intent = ElementActivity.createStartIntent(view.getContext(), holder.getNameOfProduct().getText().toString(), holder.getDescription(), watermarkimage);
             view.getContext().startActivity(intent);//тут будет вызываться новое активитии с подробной информацией
         } else {
-            Fragment elementFragment= ElementFragment.createStartFragment( holder.getNameOfProduct().getText().toString(),holder.getDescription(), watermarkimage);
+            Fragment elementFragment = ElementFragment.createStartFragment(holder.getNameOfProduct().getText().toString(), holder.getDescription(), watermarkimage);
             fragmentManager.beginTransaction().replace(R.id.fragment_container1, elementFragment).commit();
         }
     }
+
     public void initWithStartProduct() {
-        Product p=modelProductStub.getProducts().get(0);
+        Product p = modelProductStub.getProducts().get(0);
         adapter.addFragment(p);
     }
-
 
 
 }

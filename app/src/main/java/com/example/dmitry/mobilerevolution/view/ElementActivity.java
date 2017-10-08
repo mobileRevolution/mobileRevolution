@@ -14,42 +14,33 @@ import com.example.dmitry.mobilerevolution.R;
  * Created by user on 01.10.2017.
  */
 
-public class ElementActivity  extends AppCompatActivity {
-    /*private static final String BUNDLE_ID = "bundle_id";*/
+public class ElementActivity extends AppCompatActivity {
 
-    private static TextView nameOfProduct;
-    private static ImageView image;
-    private static TextView description;
-    private static String name="nameOfProduct";
-    private static String descriptionOfProduct="descriptionOfProduct";
-    private static String imageOfProduct="imageOfProduct";
-
-    public static Intent createStartIntent(Context context, String nameOfProduct, String description, Bitmap image) {
-        Intent intent = new Intent(context, ElementActivity.class);
-        intent.putExtra(ElementActivity.name, nameOfProduct);
-        intent.putExtra(ElementActivity.descriptionOfProduct,description);
-        intent.putExtra(ElementActivity.imageOfProduct,image);
-        return intent;
-    }
-
-    public void beforeStart(Bundle extras){
-        nameOfProduct.setText(extras.getString(name));
-        description.setText(extras.getString(descriptionOfProduct));
-        image.setImageBitmap((Bitmap)extras.getParcelable(imageOfProduct));
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.information_element);
-        nameOfProduct=(TextView) findViewById(R.id.elementName);
-        image=(ImageView) findViewById(R.id.elementPhoto);
-        description=(TextView) findViewById(R.id.elementDescription);
+        IntentBundleFields.nameOfProduct = (TextView) findViewById(R.id.elementName);
+        IntentBundleFields.image = (ImageView) findViewById(R.id.elementPhoto);
+        IntentBundleFields.description = (TextView) findViewById(R.id.elementDescription);
 
         Bundle extras = getIntent().getExtras();
-
         // Этот код выносится в отдельный метод, названия полей задаются константами
         beforeStart(extras);
+    }
 
+    public static Intent createStartIntent(Context context, String nameOfProduct, String description, Bitmap image) {
+        Intent intent = new Intent(context, ElementActivity.class);
+        intent.putExtra(IntentBundleFields.name, nameOfProduct);
+        intent.putExtra(IntentBundleFields.descriptionOfProduct, description);
+        intent.putExtra(IntentBundleFields.imageOfProduct, image);
+        return intent;
+    }
+
+    public void beforeStart(Bundle extras) {
+        IntentBundleFields.nameOfProduct.setText(extras.getString(IntentBundleFields.name));
+        IntentBundleFields.description.setText(extras.getString(IntentBundleFields.descriptionOfProduct));
+        IntentBundleFields.image.setImageBitmap((Bitmap) extras.getParcelable(IntentBundleFields.imageOfProduct));
     }
 
 }
