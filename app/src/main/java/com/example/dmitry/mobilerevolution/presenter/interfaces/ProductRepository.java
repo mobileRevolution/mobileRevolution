@@ -1,9 +1,9 @@
-package com.example.dmitry.mobilerevolution.repository.interfaces;
+package com.example.dmitry.mobilerevolution.presenter.interfaces;
 
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
-import com.example.dmitry.mobilerevolution.view.AdapterRecycleView;
+import com.example.dmitry.mobilerevolution.view.adapters.AdapterRecycleView;
 
 /**
  * Created by user on 06.10.2017.

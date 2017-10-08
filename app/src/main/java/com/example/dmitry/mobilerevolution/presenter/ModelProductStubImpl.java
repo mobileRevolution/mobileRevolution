@@ -1,11 +1,12 @@
-package com.example.dmitry.mobilerevolution.model;
+package com.example.dmitry.mobilerevolution.presenter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 
 import com.example.dmitry.mobilerevolution.R;
-import com.example.dmitry.mobilerevolution.model.interfaces.ModelProductStub;
+import com.example.dmitry.mobilerevolution.model.Product;
+import com.example.dmitry.mobilerevolution.presenter.interfaces.ModelProductStub;
 
 import java.util.ArrayList;
 import java.util.HashMap;

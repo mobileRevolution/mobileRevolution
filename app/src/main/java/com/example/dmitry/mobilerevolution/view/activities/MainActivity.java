@@ -1,4 +1,4 @@
-package com.example.dmitry.mobilerevolution.view;
+package com.example.dmitry.mobilerevolution.view.activities;
 
 
 import android.support.design.widget.TabLayout;
@@ -7,8 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.dmitry.mobilerevolution.R;
-import com.example.dmitry.mobilerevolution.view.AdapterViewPager;
-import com.example.dmitry.mobilerevolution.view.FragmentRecyclerView;
+import com.example.dmitry.mobilerevolution.view.adapters.AdapterViewPager;
+import com.example.dmitry.mobilerevolution.view.fragments.FragmentRecyclerView;
 
 
 public class MainActivity extends AppCompatActivity {

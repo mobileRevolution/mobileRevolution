@@ -1,4 +1,4 @@
-package com.example.dmitry.mobilerevolution.view;
+package com.example.dmitry.mobilerevolution.view.adapters;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -14,8 +14,9 @@ import android.widget.TextView;
 
 import com.example.dmitry.mobilerevolution.R;
 import com.example.dmitry.mobilerevolution.model.Product;
-import com.example.dmitry.mobilerevolution.repository.ProductRepositoryImpl;
-import com.example.dmitry.mobilerevolution.repository.interfaces.ProductRepository;
+import com.example.dmitry.mobilerevolution.presenter.ProductRepositoryImpl;
+import com.example.dmitry.mobilerevolution.presenter.interfaces.ProductRepository;
+import com.example.dmitry.mobilerevolution.view.fragments.ElementFragment;
 import com.example.dmitry.mobilerevolution.view.interfaces.ViewAdapter;
 
 /**
@@ -29,18 +30,19 @@ import com.example.dmitry.mobilerevolution.view.interfaces.ViewAdapter;
  * не обязательно, но нужно иметь ввиду.
  * К тому же, можно использовать комбинацию Ctrl + Alt + L для форматирования.
  */
-public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.ViewHolder>implements ViewAdapter {
+public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.ViewHolder> implements ViewAdapter {
 
 
     private LayoutInflater inflater;
     private FragmentManager fragmentManager;
     private ProductRepository repository;
 
-    public AdapterRecycleView(Context context){
+    public AdapterRecycleView(Context context) {
         this.inflater = LayoutInflater.from(context);
-        repository=new ProductRepositoryImpl(context,this);
+        repository = new ProductRepositoryImpl(context, this);
 
     }
+
     public void setManager(FragmentManager manager) {
         this.fragmentManager = manager;
         repository.setFragmentManager(manager);
@@ -54,14 +56,14 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        repository.initProduct(holder,position);
+        repository.initProduct(holder, position);
         // Лучше в классе ViewHolder добавить метод
         // void init(Product product);
         // и перенести туда эту логику, потому что иначе если будет несколько типов ViewHolder'ов,
         // то здесь будет много кода
     }
 
-    public void setProductComponent(){
+    public void setProductComponent() {
 
     }
 
@@ -70,8 +72,8 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
         return repository.getSizeOfProducts();
     }
 
-    public void addFragment(Product p){
-        Fragment elementFragment= ElementFragment.createStartFragment(p.getName(),p.getDescription(),null);
+    public void addFragment(Product p) {
+        Fragment elementFragment = ElementFragment.createStartFragment(p.getName(), p.getDescription(), null);
         fragmentManager.beginTransaction().replace(R.id.fragment_container1, elementFragment).commit();
 
     }
@@ -90,6 +92,7 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
             this.buttonAdd = itemView.findViewById(R.id.elementImageButtonAdd);
             this.viewBackground = itemView.findViewById(R.id.elementView);
             viewBackground.setOnClickListener(this);
+
             if (itemView.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 repository.initWithStartProduct();
             }
@@ -102,16 +105,19 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
 
         @Override
         public void onClick(View view) {
-            repository.initWithProduct(this,view);
+            repository.initWithProduct(this, view);
         }
+
         public void init(Product product) {
             nameOfProduct.setText(product.getName());
             photoProduct.setImageDrawable(product.getPhoto());
             setDescription(product.getDescription());
         }
+
         public String getDescription() {
             return description;
         }
+
         public ImageView getPhotoProduct() {
             return photoProduct;
         }

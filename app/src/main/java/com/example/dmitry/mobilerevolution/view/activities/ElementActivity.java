@@ -1,4 +1,4 @@
-package com.example.dmitry.mobilerevolution.view;
+package com.example.dmitry.mobilerevolution.view.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.dmitry.mobilerevolution.R;
+import com.example.dmitry.mobilerevolution.view.IntentBundleFields;
 
 /**
  * Created by user on 01.10.2017.

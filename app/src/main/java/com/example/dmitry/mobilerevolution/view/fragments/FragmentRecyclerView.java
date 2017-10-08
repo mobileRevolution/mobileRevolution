@@ -1,4 +1,4 @@
-package com.example.dmitry.mobilerevolution.view;
+package com.example.dmitry.mobilerevolution.view.fragments;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -11,11 +11,7 @@ import android.view.ViewGroup;
 
 
 import com.example.dmitry.mobilerevolution.R;
-import com.example.dmitry.mobilerevolution.model.Product;
-import com.example.dmitry.mobilerevolution.view.AdapterRecycleView;
-import com.example.dmitry.mobilerevolution.view.ElementFragment;
-
-import java.util.List;
+import com.example.dmitry.mobilerevolution.view.adapters.AdapterRecycleView;
 
 
 /**

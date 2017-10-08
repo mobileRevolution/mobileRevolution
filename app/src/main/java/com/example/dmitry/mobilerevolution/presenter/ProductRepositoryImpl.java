@@ -1,4 +1,4 @@
-package com.example.dmitry.mobilerevolution.repository;
+package com.example.dmitry.mobilerevolution.presenter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,14 +8,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
-import com.example.dmitry.mobilerevolution.view.AdapterRecycleView;
-import com.example.dmitry.mobilerevolution.view.ElementActivity;
-import com.example.dmitry.mobilerevolution.view.ElementFragment;
+import com.example.dmitry.mobilerevolution.view.adapters.AdapterRecycleView;
+import com.example.dmitry.mobilerevolution.view.activities.ElementActivity;
+import com.example.dmitry.mobilerevolution.view.fragments.ElementFragment;
 import com.example.dmitry.mobilerevolution.R;
-import com.example.dmitry.mobilerevolution.model.ModelProductStubImpl;
 import com.example.dmitry.mobilerevolution.model.Product;
-import com.example.dmitry.mobilerevolution.model.interfaces.ModelProductStub;
-import com.example.dmitry.mobilerevolution.repository.interfaces.ProductRepository;
+import com.example.dmitry.mobilerevolution.presenter.interfaces.ModelProductStub;
+import com.example.dmitry.mobilerevolution.presenter.interfaces.ProductRepository;
 import com.example.dmitry.mobilerevolution.view.interfaces.ViewAdapter;
 
 import java.util.List;

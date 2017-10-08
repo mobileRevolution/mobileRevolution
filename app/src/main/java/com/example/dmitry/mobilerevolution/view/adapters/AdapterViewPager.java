@@ -1,4 +1,4 @@
-package com.example.dmitry.mobilerevolution.view;
+package com.example.dmitry.mobilerevolution.view.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -36,7 +36,7 @@ public class AdapterViewPager extends FragmentStatePagerAdapter {
         return titles.get(position);
     }
 
-    public void addFragment(Fragment fragment, String title){
+    public void addFragment(Fragment fragment, String title) {
         listFragmentRecyclerView.add(fragment);
         titles.add(title);
     }

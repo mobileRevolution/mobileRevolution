@@ -1,4 +1,4 @@
-package com.example.dmitry.mobilerevolution.model.interfaces;
+package com.example.dmitry.mobilerevolution.presenter.interfaces;
 
 import com.example.dmitry.mobilerevolution.model.Product;
 

@@ -1,4 +1,4 @@
-package com.example.dmitry.mobilerevolution.view;
+package com.example.dmitry.mobilerevolution.view.fragments;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -8,10 +8,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.dmitry.mobilerevolution.R;
+import com.example.dmitry.mobilerevolution.view.IntentBundleFields;
 
 /**
  * Created by user on 04.10.2017.
