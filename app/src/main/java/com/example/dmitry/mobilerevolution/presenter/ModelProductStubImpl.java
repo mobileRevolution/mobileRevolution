@@ -1,6 +1,7 @@
 package com.example.dmitry.mobilerevolution.presenter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
 
@@ -12,28 +13,37 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import rx.Observable;
+
 /**
  * Created by user on 06.10.2017.
  */
 
 public class ModelProductStubImpl implements ModelProductStub {
-    private List<Product> products;
     private Context context;
 
     public ModelProductStubImpl(Context context) {
         this.context = context;
-        products = new ArrayList<>();
-        setTestData();
     }
 
     @Override
-    public List<Product> getProducts() {
-        return products;
+    public Observable<List<Product>> getProducts() {
+        return Observable.defer(()->{
+            List<Product> products = new ArrayList<>();
+            setTestData(products);
+            return Observable.just(products);
+        });
+    }
+    @Override
+    public int getProductsSize(){
+        List<Product> products = new ArrayList<>();
+        setTestData(products);
+        return products.size();
     }
 
-    private void setTestData() {
+    private void setTestData(List<Product> products) {
 
-        HashMap<String, Drawable> mapPhoto = getMapPhotos();
+        HashMap<String, String> mapPhoto = getMapPhotos();
 
         products.add(new Product("Bread", mapPhoto.get("bread"), "Bread is a staple food prepared from a dough of flour and water, usually by baking. Throughout recorded history it has been popular around the world and is one of the oldest artificial foods, having been of importance since the dawn of agriculture.\n" +
                 "\n" +
@@ -94,17 +104,17 @@ public class ModelProductStubImpl implements ModelProductStub {
 
     }
 
-    private HashMap<String, Drawable> getMapPhotos() {
-        HashMap<String, Drawable> result = new HashMap<>();
-        result.put("bread", ContextCompat.getDrawable(context, R.drawable.bread)); // необходимо использовать         ContextCompat.getDrawable(getContext(), R.drawable.bread);
-        result.put("apple", ContextCompat.getDrawable(context, R.drawable.apple));
-        result.put("lemon", ContextCompat.getDrawable(context, R.drawable.lemon));
-        result.put("pineapple", ContextCompat.getDrawable(context, R.drawable.pineapple));
-        result.put("milk", ContextCompat.getDrawable(context, R.drawable.milk));
-        result.put("lime", ContextCompat.getDrawable(context, R.drawable.lime));
-        result.put("sweets", ContextCompat.getDrawable(context, R.drawable.sweets));
-        result.put("tea", ContextCompat.getDrawable(context, R.drawable.tea));
-        result.put("coffe", ContextCompat.getDrawable(context, R.drawable.coffe));
+    private HashMap<String, String> getMapPhotos() {
+        HashMap<String,String> result = new HashMap<>();
+        result.put("bread", Integer.toString(R.drawable.bread)); // необходимо использовать         ContextCompat.getDrawable(getContext(), R.drawable.bread);
+        result.put("apple",  Integer.toString(R.drawable.apple));
+        result.put("lemon",  Integer.toString(R.drawable.lemon));
+        result.put("pineapple", Integer.toString(R.drawable.pineapple));
+        result.put("milk",  Integer.toString(R.drawable.milk));
+        result.put("lime",  Integer.toString(R.drawable.lime));
+        result.put("sweets",  Integer.toString(R.drawable.sweets));
+        result.put("tea",  Integer.toString(R.drawable.tea));
+        result.put("coffe",  Integer.toString(R.drawable.coffe));
         return result;
     }
 }

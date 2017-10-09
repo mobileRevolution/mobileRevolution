@@ -110,7 +110,7 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
 
         public void init(Product product) {
             nameOfProduct.setText(product.getName());
-            photoProduct.setImageDrawable(product.getPhoto());
+            photoProduct.setImageResource(Integer.parseInt(product.getPhoto()));
             setDescription(product.getDescription());
         }
 
