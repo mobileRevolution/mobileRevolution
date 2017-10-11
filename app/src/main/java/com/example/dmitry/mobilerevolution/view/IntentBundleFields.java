@@ -8,7 +8,7 @@ import android.widget.TextView;
  */
 
 public class IntentBundleFields {
-    public static TextView nameOfProduct;
+    public static TextView nameOfProduct; // нельзя делать статические ссылки на View, это должно быть в рамках класс View
     public static ImageView image;
     public static TextView description;
 

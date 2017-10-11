@@ -22,7 +22,7 @@ public class FragmentRecyclerView extends Fragment {
 
     // должен быть модификатор private
     public FragmentRecyclerView()
-    {
+    {// неправильный перенос
 
     }
 
@@ -32,14 +32,14 @@ public class FragmentRecyclerView extends Fragment {
     }
 
     @Nullable
-    @Override
+    @Override // отступы по CodeStyle
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //привязываю RecycleView к фрагменту
         ViewGroup viewGroup = (ViewGroup)inflater.inflate(R.layout.fragment_recycleview,container, false);
         RecyclerView rv = viewGroup.findViewById(R.id.fragmentRecyclerView);
         if(getActivity().getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){
             Fragment f=new ElementFragment();
-            this.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.fragment_container1,f);
+            this.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.fragment_container1,f); // где commit?
         }
         //привязываю адаптер для RecycleView
         AdapterRecycleView adapter = new AdapterRecycleView(getContext());
