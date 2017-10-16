@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.alpha, R.anim.alpha);
         setContentView(R.layout.activity_main);
         viewPager = (ViewPager) findViewById(R.id.activityMainViewPager);
         setUpViewPager();
