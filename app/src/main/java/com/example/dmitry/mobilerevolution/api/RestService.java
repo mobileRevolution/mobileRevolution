@@ -17,10 +17,12 @@ public interface RestService {
 
     String BASE_URL = "https://android-cources.simbirsoft1.com/api/";
 
+    // отсутсвуют данные на сервере Оо
+
     @Headers({"Authorization: Basic NTlkZGI5ZmZhNGJlMjA1ODZkMjYwZWEyOiBhMDUzMTMxN2Jk",
             "X-Api-Factory-Application-Id: 59ddb9ffa4be20586d260ea2",
             "Content-Type: application/json"})
-    @GET("db/Product")
+    @GET("db/product")
     Observable<BaseResponse<List<Product>>> getProducts();
 
 }
