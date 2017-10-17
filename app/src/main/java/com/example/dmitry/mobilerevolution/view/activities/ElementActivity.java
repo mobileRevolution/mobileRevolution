@@ -20,7 +20,7 @@ public class ElementActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.left_out, R.anim.left_out);
+        overridePendingTransition(R.anim.from_right, R.anim.alpha);
         setContentView(R.layout.information_element);
         IntentBundleFields.nameOfProduct = (TextView) findViewById(R.id.elementName);
         IntentBundleFields.image = (ImageView) findViewById(R.id.elementPhoto);
