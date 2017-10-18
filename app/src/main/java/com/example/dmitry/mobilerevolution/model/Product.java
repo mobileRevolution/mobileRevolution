@@ -5,21 +5,14 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 
-import com.google.gson.annotations.SerializedName;
-
 /**
  * Created by dmitry on 30.09.17.
  */
 
 public class Product {
 
-    @SerializedName("name")
     private String name;
-
-    @SerializedName("photo")
     private String photo;
-
-    @SerializedName("description")
     private String description;
 
 

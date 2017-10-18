@@ -39,7 +39,7 @@ public class FragmentRecyclerView extends Fragment {
         RecyclerView rv = viewGroup.findViewById(R.id.fragmentRecyclerView);
         if(getActivity().getResources().getConfiguration().orientation==Configuration.ORIENTATION_LANDSCAPE){
             Fragment f=new ElementFragment();
-            this.getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container1,f).commit(); // где commit?
+            this.getActivity().getSupportFragmentManager().beginTransaction().add(R.id.fragment_container1,f); // где commit?
         }
         //привязываю адаптер для RecycleView
         AdapterRecycleView adapter = new AdapterRecycleView(getContext());

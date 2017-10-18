@@ -4,8 +4,7 @@ import com.example.dmitry.mobilerevolution.model.Product;
 
 import java.util.List;
 
-import io.reactivex.Observable;
-
+import rx.Observable;
 
 /**
  * Created by user on 06.10.2017.

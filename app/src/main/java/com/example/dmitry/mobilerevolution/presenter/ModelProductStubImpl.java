@@ -4,12 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 
 import com.example.dmitry.mobilerevolution.R;
-import com.example.dmitry.mobilerevolution.api.BaseResponse;
-import com.example.dmitry.mobilerevolution.api.RestService;
-import com.example.dmitry.mobilerevolution.api.RestServiceProvider;
 import com.example.dmitry.mobilerevolution.model.Product;
 import com.example.dmitry.mobilerevolution.presenter.interfaces.ModelProductStub;
 
@@ -17,20 +13,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
+import rx.Observable;
 
 /**
  * Created by user on 06.10.2017.
  */
 
 public class ModelProductStubImpl implements ModelProductStub {
-    private static final String LOG_TAG = "ModelProductStubImpl";
     private Context context;
-    private RestService restService = RestServiceProvider.newInstance().getRestService();
-    List<Product> products = new ArrayList<>();
 
     public ModelProductStubImpl(Context context) {
         this.context = context;
@@ -38,18 +28,16 @@ public class ModelProductStubImpl implements ModelProductStub {
 
     @Override
     public Observable<List<Product>> getProducts() {
-        Log.d(LOG_TAG, " getProducts");
-        restService.getProducts().map(BaseResponse::getData)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.newThread())
-                .subscribe(s -> products = s, throwable -> Log.e(LOG_TAG,"EXCEPTION "+ throwable.getMessage()));
-        Log.d(LOG_TAG, String.valueOf(products.size()) + " Size of list");
-
-        return restService.getProducts().map(BaseResponse::getData);
+        return Observable.defer(()->{
+            List<Product> products = new ArrayList<>();
+            setTestData(products);
+            return Observable.just(products);
+        });
     }
-
     @Override
-    public int getProductsSize() {
+    public int getProductsSize(){
+        List<Product> products = new ArrayList<>();
+        setTestData(products);
         return products.size();
     }
 

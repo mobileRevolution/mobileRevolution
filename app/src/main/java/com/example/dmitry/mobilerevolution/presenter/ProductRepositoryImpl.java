@@ -6,7 +6,6 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.View;
 
 import com.example.dmitry.mobilerevolution.view.adapters.AdapterRecycleView;
@@ -20,18 +19,14 @@ import com.example.dmitry.mobilerevolution.view.interfaces.ViewAdapter;
 
 import java.util.List;
 
-
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by user on 06.10.2017.
  */
 
 public class ProductRepositoryImpl implements ProductRepository {
-    private static final String LOG_TAG = "ProductRepositoryImpl";
     private ModelProductStub modelProductStub;
     private ViewAdapter adapter;
     private FragmentManager fragmentManager;
@@ -47,9 +42,7 @@ public class ProductRepositoryImpl implements ProductRepository {
 
     @Override
     public void initProduct(AdapterRecycleView.ViewHolder holder, int position) {
-        Log.d(LOG_TAG, " init_product: position"+ String.valueOf(position));
-        modelProductStub.getProducts()
-                .subscribeOn(Schedulers.newThread())
+        modelProductStub.getProducts().subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         products->{
@@ -79,11 +72,14 @@ public class ProductRepositoryImpl implements ProductRepository {
     }
 
     public void initWithStartProduct() {
-        modelProductStub.getProducts()
-                .subscribeOn(Schedulers.newThread())
+        modelProductStub.getProducts().subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(products -> Observable.fromIterable(products))
-                .subscribe(product-> adapter.addFragment(product), throwable -> Log.e(LOG_TAG, "EXCEPTION "+throwable.getMessage()));
+                .subscribe(
+                        products->{
+                            adapter.addFragment(products.get(0));
+                        }
+                );
+
     }
 
 

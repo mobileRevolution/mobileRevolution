@@ -40,8 +40,6 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
     public AdapterRecycleView(Context context) {
         this.inflater = LayoutInflater.from(context);
         repository = new ProductRepositoryImpl(context, this);
-        //добавил
-        repository.initWithStartProduct();
 
     }
 
@@ -59,7 +57,6 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         repository.initProduct(holder, position);
-        notifyDataSetChanged();
         // Лучше в классе ViewHolder добавить метод
         // void init(Product product);
         // и перенести туда эту логику, потому что иначе если будет несколько типов ViewHolder'ов,
@@ -78,7 +75,6 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
     public void addFragment(Product p) {
         Fragment elementFragment = ElementFragment.createStartFragment(p.getName(), p.getDescription(), null);
         fragmentManager.beginTransaction().replace(R.id.fragment_container1, elementFragment).commit();
-        this.notifyDataSetChanged();
 
     }
 
@@ -114,8 +110,7 @@ public class AdapterRecycleView extends RecyclerView.Adapter<AdapterRecycleView.
 
         public void init(Product product) {
             nameOfProduct.setText(product.getName());
-            //тут наверняка надо получать данные из сети
-            //photoProduct.setImageResource(Integer.parseInt(product.getPhoto()));
+            photoProduct.setImageResource(Integer.parseInt(product.getPhoto()));
             setDescription(product.getDescription());
         }
 
